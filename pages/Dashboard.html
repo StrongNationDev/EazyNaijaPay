@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - EazyNaijaPay</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/terms.css">
+</head>
+<body>
+  <!-- Top Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <p id="Username">Hello 👋</p>
+      <small>What bill did you want to go for today?</small>
+    </div>
+    <div class="balance-card">
+      <p class="balance-text">Available Balance</p>
+      <h1 id="balance">0 NGN</h1>
+      <img src="../assets/atm.png" alt="ATM Icon" class="atm-icon">
+      <img src="../assets/master.png" alt="Mastercard" class="mastercard-icon">
+      <button class="topup-btn">
+        <a href="./funding.html">Top Up +</a>
+      </button>
+    </div>
+  </header>
+
+  <!-- Services Section -->
+  <section class="services">
+    <h3>Our Services</h3>
+    <div class="services-container">
+      <div class="service-card" onclick="location.href='./buy-data.html'">
+        <img src="../assets/data.png" alt="Data Pack">
+        <p>Data Pack</p>
+      </div>
+      <div class="service-card" onclick="location.href='./buy-airtime.html'">
+        <img src="../assets/airtime.png" alt="Airtime">
+        <p>Airtime</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Activities -->
+  <section class="recent-activities">
+    <div class="activity-header">
+      <h3>Recent Activities</h3>
+      <a href="./notification.html">View All</a>
+    </div>
+    <div class="activities-list">
+      <div class="activity-card">
+        <h4>Top Up Successful</h4>
+        <p>You have successfully funded your account with 5,000 NGN</p>
+        <span>Wednesday 02:05 PM</span>
+        <span id="ref">reference id</span>
+      </div>
+      <div class="activity-card">
+        <h4>Data Purchase Successful</h4>
+        <p>You have bought 3gb MTN Data worth for 07061389708</p>
+        <span>Monday 03:10 PM</span>
+        <span id="ref">reference id</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Navbar -->
+  <nav class="bottom-navbar">
+    <a href="" class="nav-link active">
+      <img src="../assets/home.png" alt="Home">
+    </a>
+    <a href="./notification.html" class="nav-link">
+      <img src="../assets/notify.png" alt="Notifications">
+    </a>
+    <a href="./settings.html" class="nav-link">
+      <img src="../assets/settings.png" alt="Settings">
+    </a>
+  </nav>
+
+  <!-- Terms and Services Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Terms and Services</h2>
+      <div class="terms-text">
+        <p>Welcome to <b>EazyNaijaPay</b>! By using our platform to purchase data, airtime, or fund your betting account, you agree to abide by the following terms and services:</p>
+        <ol>
+          <li><b>Eligibility:</b> You must be 18 years or older and a resident of Nigeria to use our platform.</li>
+          <li><b>User Responsibilities:</b> Provide accurate details during account creation and transactions.</li>
+          <li><b>Transactions:</b> All purchases are final and non-refundable once processed successfully.</li>
+          <li><b>Security:</b> Do not share account details or passwords. We adhere to NDPR for data security.</li>
+          <li><b>Payment:</b> Payments are processed securely via trusted providers.</li>
+          <li><b>Fraud Prevention:</b> Fraudulent activity will result in account suspension and potential legal action.</li>
+        </ol>
+        <p>By proceeding, you agree to these terms. If you disagree, you may discontinue using the platform.</p>
+      </div>
+      <div class="modal-buttons">
+        <button onclick="agreeTerms()">Agree</button>
+        <button onclick="closeModal()">Disagree</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay">
+    <div class="popup">
+      <h2>Set PIN for Transaction</h2>
+      <p>This is the pin you will be using to confirm any of your purchases</p>
+      <div class="pin-input-container">
+        <input type="password" maxlength="1" class="pin-input">
+        <input type="password" maxlength="1" class="pin-input">
+        <input type="password" maxlength="1" class="pin-input">
+        <input type="password" maxlength="1" class="pin-input">
+      </div>
+      <button class="btn">Continue</button>
+    </div>
+  </div>
+
+  <script src="../update/dashboard.js"></script>
+  <script src="../update/login.js"></script>
+
+
+  <!-- testing -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const pinInputs = document.querySelectorAll('.pin-input');
+  
+      pinInputs.forEach((input, index) => {
+        input.addEventListener('input', () => {
+          if (input.value.length === 1 && index < pinInputs.length - 1) {
+            pinInputs[index + 1].focus();
+          }
+        });
+  
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && input.value.length === 0 && index > 0) {
+            pinInputs[index - 1].focus();
+          }
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,263 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #3eb4ff, #4ce8c6);
+  color: #000;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.title {
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+}
+
+.back-btn {
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.chat-btn img {
+  width: 25px;
+  height: 25px;
+}
+
+/* Main Content */
+.container {
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  position: relative;
+  /* margin-bottom: 50px; */
+}
+
+.up-input-group{
+  margin-bottom: 15px;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.label-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  padding-right: 20px;
+}
+
+.field-icon {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Dropdown */
+.dropdown-label {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 55%;
+  border-radius: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.network-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.dropdown {
+  border: none;
+  outline: none;
+  flex: 1;
+}
+
+/* Amount Options */
+.amount-options {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.amount-btn {
+  background: #4dd0e1;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.amount-btn:hover {
+  background: #00bcd4;
+}
+
+/* Pin Section */
+.pin-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.pin-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pin-input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+
+
+
+/* new wrapper for amount */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.currency-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+
+/* Continue Button */
+.continue-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, #00bcd4, #0086c3);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.continue-btn:hover {
+  background: linear-gradient(to right, #0086c3, #006b9a);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background: #4dd0e1;
+  padding: 10px 0;
+}
+
+.nav-item img {
+  width: 30px;
+  transition: transform 0.2s ease;
+}
+
+.nav-item:hover img {
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+/* Alerts and notifications customizations */
+/* Alert Box Style */
+.alert-box {
+  display: none; /* Hidden by default */
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  width: 300px;
+  text-align: center;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.alert-box.active {
+  display: block;
+}
+
+.alert-message {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Button Style */
+.alert-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.alert-button:hover {
+  background-color: #0056b3;
+}

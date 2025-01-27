@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Betting Page</title>
+  <link rel="stylesheet" href="../css/bettings.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- Page Header -->
+  <div class="header">
+    <a href="./Dashboard.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+    <span>Betting</span>
+    <i class="fas fa-bars menu-icon"></i>
+  </div>
+
+  <!-- Content Section -->
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        <img src="https://via.placeholder.com/30" alt="Sportybet Logo" class="brand-logo">
+        <span>Sportybet</span>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <p class="card-description">
+        Ready to hit the road in a brand-new car? Deposit now on Sportybet for your chance to drive away in style! Don't miss out, start playing today! (<a href="https://sportybet.com">www.sportybet.com</a>)
+      </p>
+
+      <!-- Input Fields -->
+      <label for="phone-number" class="label">User ID</label>
+      <input type="text" id="phone-number" placeholder="Enter Sportybet Phone Number" />
+
+      <!-- Select Amount Section -->
+      <label for="amount" class="label">Select Amount</label>
+      <div class="amount-grid">
+        <div class="amount-box" onclick="setAmount(100)">₦100<br><small>Pay ₦100</small></div>
+        <div class="amount-box" onclick="setAmount(500)">₦500<br><small>Pay ₦500</small></div>
+        <div class="amount-box" onclick="setAmount(1000)">₦1,000<br><small>Pay ₦1,000</small></div>
+        <div class="amount-box" onclick="setAmount(2000)">₦2,000<br><small>Pay ₦2,000</small></div>
+        <div class="amount-box" onclick="setAmount(5000)">₦5,000<br><small>Pay ₦5,000</small></div>
+        <div class="amount-box" onclick="setAmount(10000)">₦10,000<br><small>Pay ₦10,000</small></div>
+      </div>
+
+      <!-- Manual Amount Input -->
+      <div class="manual-amount">
+        <span>₦</span>
+        <input type="number" id="custom-amount" placeholder="100 - 200,000">
+      </div>
+    </div>
+
+    <!-- PIN Verification -->
+    <div class="pin-section">
+      <p>Verify Pin</p>
+      <div class="pin-input">
+        <input type="password" maxlength="1">
+        <input type="password" maxlength="1">
+        <input type="password" maxlength="1">
+        <input type="password" maxlength="1">
+      </div>
+      <button class="pay-btn">Pay</button>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"> src </script>
+  <script src="../js/alerts.js"></script>
+  <!-- Script -->
+  <script>
+    function setAmount(value) {
+      document.getElementById('custom-amount').value = value;
+    }
+  </script>
+</body>
+</html>

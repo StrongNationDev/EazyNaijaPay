@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register as a New User</title>
+  <link rel="stylesheet" href="./styles/register.css">
+</head>
+<body>
+  <div class="background">
+    <div class="register-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Logo"> 
+      </div>
+
+      <h2>Register as a new user</h2>
+      <p class="signin-text">Already have an account? <a href="signin.html">Sign In</a></p>
+
+      <form id="signupForm">
+        <label for="email" id="label-email">Email Address</label>
+        <input type="email" id="email" placeholder="John@gmail.com" required>
+
+        <label for="phone" id="label-phone">Phone Number</label>
+        <input type="text" id="phone" placeholder="07032000000" required>
+
+        <label for="username" id="label-username">Username</label>
+        <input type="text" id="username" placeholder="John-Doe" required>
+
+        <label for="password" id="label-password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="Enter password" required>
+          <span class="eye-icon" onclick="togglePassword()">&#128065;</span>
+          <span class="eye-icon" onclick="togglePassword()"></span>
+        </div>
+
+        <button type="submit" class="continue-btn">Sign Up</button>
+      </form>
+    </div>
+  </div>
+  <script src="./update/register.js"></script>
+  <script src="./update/old.js"></script>
+</body>
+</html>
+
+

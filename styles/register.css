@@ -1,0 +1,126 @@
+/* style.css */
+
+/* Reset some default browser styles */
+body, h2, p {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #f4f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .background {
+    width: 100%;
+    max-width: 400px;
+    background: #000000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px 30px;
+  }
+  
+  .register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .logo img {
+    max-width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .signin-text {
+    font-size: 14px;
+    color: #b8b8b8;
+    margin-bottom: 20px;
+  }
+  
+  .signin-text a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .signin-text a:hover {
+    text-decoration: underline;
+  }
+  
+  form {
+    width: 100%;
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    color: #9e9e9e;
+    margin-bottom: 5px;
+    width: 80%;
+    align-items: left;
+  }
+  
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333333;
+    outline: none;
+  }
+  
+  input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  }
+  
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-wrapper .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: pointer;
+    color: #555555;
+  }
+  
+  .continue-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .continue-btn:hover {
+    background-color: #0056b3;
+  }
+  

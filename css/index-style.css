@@ -1,0 +1,196 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Background Gradient */
+  .background {
+    height: 100vh;
+    background: linear-gradient(135deg, #33C7E8 0%, #2683E5 50%, #4FD3A4 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+/* Container for the form */
+.register-container {
+    background: rgba(250, 250, 250, 0.15);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 30px 40px;
+    border-radius: 15px;
+    width: 320px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+  }
+  
+  
+  /* Logo */
+  .logo img {
+    width: 80px; 
+    margin-bottom: 10px;
+  }
+  
+  /* Heading */
+  h2 {
+    color: #f1f1f1;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .signin-text {
+    color: #f7f7f7;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .signin-text a {
+    text-decoration: none;
+    color: #00ff80;
+    font-weight: bold;
+  }
+  
+  /* Form Styles */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    text-align: left;
+    color: #d3d3d3;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    height: 50px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #2683E5;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    font-weight: bold;    
+    outline: none;
+  }
+
+  .input:focus {
+    border-color: #4FD3A4;
+    box-shadow: 0 0 8px rgba(79, 211, 164, 0.8);
+}
+  
+  
+  /* Continue Button */
+  .continue-btn {
+    width: 200px;
+    background: linear-gradient(to right, #4FD3A4, #2683E5);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+    align-self: center;
+  }
+  
+  .continue-btn:hover {
+    background: linear-gradient(to right, #2683E5, #4FD3A4);
+  }
+  
+
+/* Pin inputs styling */
+  
+  .pin-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 30px;
+}
+
+.pin-input {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2683E5;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+}
+
+.pin-input:focus {
+    border-color: #4FD3A4;
+    box-shadow: 0 0 8px rgba(79, 211, 164, 0.8);
+}
+
+.user-id{
+    display: block;
+    background-color: #d3d3d3;
+    border-radius: 15px;
+    margin-top: 15px;
+    width: 170px;
+    color: #00ff80;
+    align-self: center;
+}
+
+
+
+
+
+
+
+/* Alerts and notifications customizations */
+/* Alert Box Style */
+.alert-box {
+  display: none; /* Hidden by default */
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  width: 300px;
+  text-align: center;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.alert-box.active {
+  display: block;
+}
+
+.alert-message {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Button Style */
+.alert-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.alert-button:hover {
+  background-color: #0056b3;
+}

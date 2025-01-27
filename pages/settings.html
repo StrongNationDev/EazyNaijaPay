@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+    <div class="settings-page">
+        <header class="settings-header">
+            <div class="header-content">
+                <h1>Settings</h1>
+                <p>You can control all your account details from here!</p>
+            </div>
+        </header>
+
+        <div class="profile-section">
+            <img src="../assets/profile-icon.png" alt="Profile Picture" class="profile-img">
+            <p id="Username" class="user-name">John Doe</p>
+            <p id="User_id" class="user-id">User Permit ID: 2255507096</p>
+        </div>
+
+        <div class="settings-list">
+            <ul>
+                <li><a href="https://t.me/EazyNaijaPayCommunity">Join Community</a></li>
+                <li><a href="#" class="change-pin" >Change Pin</a></li>
+                <li><a href="https://t.me/+aka-9aVdtQ01NjY8">Contact Support</a></li>
+                <li><a href="#" class="refer">Refer a Friend</a></li>
+                <li><a href="#" class="terminate">Terminate Account</a></li>
+            </ul>
+        </div>
+
+        <!-- Popup Modal -->
+        <div id="terminateModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Confirm Termination</h2>
+                <p>Are you sure you want to terminate your account? This action cannot be undone.</p>
+                <button id="confirmTerminate" class="btn-danger">Confirm</button>
+                <button id="cancelTerminate" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Refer Modal -->
+        <div id="refer-modal" class="modal2">
+            <div class="modal-content2">
+                <button class="close-modal">×</button>
+                <p>You will get 100 NGN as rewards on each of your referrals that funds their account.</p>
+                <p>You will need to get your referral "User Permit ID" and "Username", send them to the administrator to get your reward within 24 hours.</p>
+                <div class="referral-link">
+                    <input id="referral-link" type="text" readonly value="https://t.me/EazyNaijaPayBot?start=referral">
+                    <button id="copy-link">Copy Referral Link</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bottom Navbar -->
+        <nav class="bottom-navbar">
+            <a href="./Dashboard.html" class="nav-link active">
+                <img src="../assets/home.png" alt="Home">
+            </a>
+            <a href="../pages/notification.html" class="nav-link">
+                <img src="../assets/notify.png" alt="Notifications">
+            </a>
+            <a href="" class="nav-link">
+                <img src="../assets/settings.png" alt="Settings">
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/setting.js"></script>
+    <script src="../js/profile.js"></script>
+    <script src="../js/terminate.js"></script>
+    <script src="../js/refers.js"></script>
+    <script src="../js/alerts.js"></script>
+
+</body>
+</html>
