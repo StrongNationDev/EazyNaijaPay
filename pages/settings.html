@@ -18,13 +18,13 @@
         <div class="profile-section">
             <img src="../assets/profile-icon.png" alt="Profile Picture" class="profile-img">
             <p id="Username" class="user-name">John Doe</p>
-            <p id="User_id" class="user-id">User Permit ID: 2255507096</p>
+            <p id="User_id" class="user-id">User Permit ID: </p>
         </div>
 
         <div class="settings-list">
             <ul>
                 <li><a href="https://t.me/EazyNaijaPayCommunity">Join Community</a></li>
-                <li><a href="#" class="change-pin" >Change Pin</a></li>
+                <li><a href="#" class="change-pin" >Change Password</a></li>
                 <li><a href="https://t.me/+aka-9aVdtQ01NjY8">Contact Support</a></li>
                 <li><a href="#" class="refer">Refer a Friend</a></li>
                 <li><a href="#" class="terminate">Terminate Account</a></li>
@@ -69,11 +69,23 @@
         </nav>
     </div>
 
-    <script src="../js/setting.js"></script>
-    <script src="../js/profile.js"></script>
-    <script src="../js/terminate.js"></script>
-    <script src="../js/refers.js"></script>
-    <script src="../js/alerts.js"></script>
 
+
+    <!-- Password Reset Modal -->
+    <div id="passwordResetModal" class="modal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Change Password</h2>
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" placeholder="Enter new password" required>
+        <button id="savePassword">Save</button>
+        </div>
+    </div>
+
+
+
+    <script src="../update/profile.js"></script>
+    <script src="../update/auth.js"></script>
+    <script src="../update/pass-reset.js"></script>
 </body>
 </html>
