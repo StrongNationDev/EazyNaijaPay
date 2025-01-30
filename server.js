@@ -4,13 +4,11 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// Models
 const User = require('./models/User');
 
 const app = express();
 const PORT = 3000;
 
-// MongoDB URI
 const MONGO_URI = "mongodb+srv://EazyNaijaPay:Ade2003@eazynaijapay.asnqh.mongodb.net/EazyNaijaPay_Bot?retryWrites=true&w=majority";
 
 // Middleware
@@ -154,13 +152,35 @@ app.get('/Verified_Members/:user_id/balance', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
     return res.status(200).json({ user_id, balance: user.balance });
   } catch (error) {
     console.error('Error fetching user balance:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
+
+// Fetch Transaction Histories by user_id
+app.get('/Verified_Members/:user_id/transaction_histories', async (req, res) => {
+  const { user_id } = req.params;
+
+  try {
+    const user = await User.findOne({ user_id }, { transaction_histories: 1 });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json(user.transaction_histories);
+  } catch (error) {
+    console.error('Error fetching transaction histories:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
 
 
 // Start the server
