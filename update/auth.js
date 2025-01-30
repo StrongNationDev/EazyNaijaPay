@@ -4,6 +4,7 @@ function getUserId() {
       console.warn('User ID not found. Please log in again.');
     }
     return userId;
+    
   }
   
   function ensureLoggedIn() {
@@ -12,7 +13,8 @@ function getUserId() {
       alert('You are not logged in. Redirecting to login page.');
       window.location.href = '../index.html'; 
     }
+    console.log(`User ID loaded: ${userId}`);
   }
-  
+
   document.addEventListener('DOMContentLoaded', ensureLoggedIn);
   
