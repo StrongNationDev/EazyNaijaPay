@@ -100,12 +100,34 @@ app.get('/Verified_Members', async (req, res) => {
 
 
 
-// Fetch User by ID
+// // Fetch User by ID
+// app.get('/Verified_Members/:user_id', async (req, res) => {
+//   const { user_id } = req.params;
+
+//   try {
+//     const user = await User.findOne({ user_id }, { user_id: 1, username: 1, email: 1, phone: 1 });
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     return res.status(200).json(user);
+//   } catch (error) {
+//     console.error('Error fetching user:', error);
+//     return res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
+
+
+// Fetch User by ID (with pin and transaction_histories)
 app.get('/Verified_Members/:user_id', async (req, res) => {
   const { user_id } = req.params;
 
   try {
-    const user = await User.findOne({ user_id }, { user_id: 1, username: 1, email: 1, phone: 1 });
+    const user = await User.findOne(
+      { user_id },
+      { user_id: 1, username: 1, email: 1, phone: 1, pin: 1, transaction_histories: 1 }
+    );
+    
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -116,6 +138,31 @@ app.get('/Verified_Members/:user_id', async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+// Fetch only the user's PIN
+app.get('/Verified_Members/:user_id/pin', async (req, res) => {
+  const { user_id } = req.params;
+
+  try {
+    const user = await User.findOne({ user_id }, { pin: 1 });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ pin: user.pin });
+  } catch (error) {
+    console.error('Error fetching user PIN:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+
+
+
+
+
 
 // Set PIN for a specific user
 app.post('/Verified_Members/:user_id/set-pin', async (req, res) => {

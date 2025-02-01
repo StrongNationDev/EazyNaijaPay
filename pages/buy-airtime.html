@@ -27,7 +27,9 @@
         <option value="3" data-icon="../assets/9mobile-icon.png">9 Mobile</option>
         <option value="4" data-icon="../assets/airtel-icon.png">Airtel</option>
       </select>
+      
     </label>
+    <span id="user-balance"></span>
   </div>
 
   <!-- Main Content -->
@@ -73,9 +75,9 @@
     <div id="verify-pin" class="pin-section">
       <label class="label-text">Verify Pin</label>
       <div class="pin-inputs">
-        <input type="password" maxlength="1" id="pin1" class="pin-input" oninput="moveToNext(this, 'pin2')">
-        <input type="password" maxlength="1" id="pin2" class="pin-input" oninput="moveToNext(this, 'pin3')">
-        <input type="password" maxlength="1" id="pin3" class="pin-input" oninput="moveToNext(this, 'pin4')">
+        <input type="password" maxlength="1" id="pin1" class="pin-input">
+        <input type="password" maxlength="1" id="pin2" class="pin-input">
+        <input type="password" maxlength="1" id="pin3" class="pin-input">
         <input type="password" maxlength="1" id="pin4" class="pin-input">
       </div>
     </div>
@@ -85,19 +87,42 @@
     <button class="continue-btn" id="paynow">Continue to pay</button>
   </section>
 
-  <script src="../js/airtime.js"></script>
-  <script src="../js/auth.js"></script>
-  <script src="../js/alerts.js"></script>
+  <script src="../update/airtime.js"></script>
+  <script src="../update/auth.js"></script>
+
 
   
     <!-- script for making pin interactive -->
     <script>
-      function moveToNext(current, nextID) {
-          if (current.value.length >= 1) {
-              document.getElementById(nextID).focus();
-          }
-      }
+      document.addEventListener("DOMContentLoaded", function () {
+          const inputs = document.querySelectorAll(".pin-input");
+      
+          inputs.forEach((input, index) => {
+              input.addEventListener("input", (e) => {
+                  if (e.inputType === "insertText" && input.value.length === 1) {
+                      // Move to next input if available
+                      if (index < inputs.length - 1) {
+                          inputs[index + 1].focus();
+                      }
+                  }
+              });
+      
+              input.addEventListener("keydown", (e) => {
+                  if (e.key === "Backspace" && input.value === "") {
+                      // Move to previous input if available
+                      if (index > 0) {
+                          inputs[index - 1].focus();
+                      }
+                  }
+              });
+          });
+      });
     </script>
+
+
+
+
+
 
   <!-- JavaScript -->
   <script>
