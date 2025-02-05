@@ -1,7 +1,7 @@
 const API_BASE_URL = "http://localhost:3000/Verified_Members";
 const DATA_API_URL = "http://localhost:5000/proxy/data";
 const AUTH_TOKEN = "8f00fa816b1e3b485baca8f44ae5d361ef803311";
-// import addTransactionHistory from './addTransactionHistory';
+
 
 const networkMap = {
     "1": "MTN",
@@ -15,7 +15,6 @@ if (!userId) {
     alert("User not authenticated. Please log in again.");
     window.location.href = "/login.html";
 }
-
 
 // async function validatePin(pin)
 async function validatePin(pin) {
@@ -38,11 +37,6 @@ async function validatePin(pin) {
     }
 }
 
-
-
-
-
-
 // Check user balance
 async function checkBalance(amount) {
     try {
@@ -60,7 +54,6 @@ async function checkBalance(amount) {
         return { success: false, message: "⚠️ Error checking balance. Please try again." };
     }
 }
-
 
 async function updateBalance(amount) {
     try {
@@ -192,6 +185,13 @@ document.getElementById("paynow").addEventListener("click", async (event) => {
         if (!response.ok) {
             const errorText = await response.text();
             console.error("Response Error:", errorText);
+
+            saveDataTransaction(transactionData); // ⛔ ERROR: Function not defined!
+            function saveDataTransaction(transactionData) {
+                console.log("✅ Saving transaction:", transactionData);
+                // Call API or save to local storage
+            }
+            
             await saveDataTransaction(network, planId, phone, "failed");
             throw new Error("❌ Failed to process data purchase.");
         }
@@ -210,6 +210,7 @@ document.getElementById("paynow").addEventListener("click", async (event) => {
         alert("⚠️ Data purchase failed. Please try again.");
     }
 });
+
 //function to fetch dataplans in the payload
 async function getPlanPrice(planId) {
     const planDropdown = document.getElementById("preferable-plan");
@@ -222,20 +223,15 @@ async function getPlanPrice(planId) {
     return parseFloat(selectedOption.getAttribute("data-price")) || 0;
 }
 
-
-
-
+//Updating of transaction histories
 document.addEventListener("DOMContentLoaded", () => {
     const verifyPinButton = document.getElementById("verifypin");
     const payNowButton = document.getElementById("paynow");
     const closeModalButton = document.getElementById("closeModal");
     const modal = document.getElementById("paymentModal");
 
-    // Only runs if balance check passes
     verifyPinButton.addEventListener("balanceCheckedSuccess", async () => {
-        const pin = [...document.querySelectorAll(".pin-input")]
-            .map(input => input.value)
-            .join("");
+        const pin = [...document.querySelectorAll(".pin-input")].map(input => input.value).join("");
 
         if (pin.length !== 4) {
             alert("Please enter a 4-digit PIN.");
@@ -249,7 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            // Set modal content
             document.getElementById("selected-network").innerText =
                 networkMap[document.getElementById("network-select").value];
             document.getElementById("selected-plan").innerText =
@@ -257,7 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("selected-phone").innerText =
                 document.getElementById("phone-number").value;
 
-            // Show the modal
             modal.style.display = "block";
         } catch (error) {
             alert("⚠️ Error processing request. Please try again.");
@@ -265,14 +259,104 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Close the modal
     closeModalButton.addEventListener("click", () => {
         modal.style.display = "none";
     });
 
-    // Pay Now event listener
     payNowButton.addEventListener("click", async () => {
         alert("Processing payment...");
         modal.style.display = "none";
-    });
+    
+        const userId = localStorage.getItem("user_id") || localStorage.getItem("User_id");
+        if (!userId) {
+            alert("User not authenticated. Please log in.");
+            return;
+        }
+    
+        const amount = parseFloat(localStorage.getItem("amountToPay")); // Fetch amount from localStorage
+        const phone = document.getElementById("phone-number").value.trim();
+        const network = document.getElementById("network-select").value;
+        const planId = document.getElementById("preferable-plan").value;
+        console.log("Retrieved amount:", amount);
+    
+        if (!amount || isNaN(amount) || amount <= 0) {
+            console.error("❌ Invalid transaction amount:", amount);
+            alert("⚠️ Invalid transaction amount. Please try again.");
+            return;
+        }
+    
+        try {
+            const response = await processPayment(network, planId, phone, amount);
+            console.log("✅ Payment Response:", response);
+    
+            const transactionData = {
+                transaction_id: `trans_${Date.now()}`,
+                type: "data",
+                amount: amount,  // Ensure the correct amount is stored
+                status: "success",
+                created_at: new Date().toISOString()
+            };
+            await addTransactionHistory(userId, transactionData);
+    
+            alert("✅ Success! Data purchased successfully.");
+        } catch (error) {
+            console.error("Error processing data purchase:", error);
+    
+            const transactionData = {
+                transaction_id: `trans_${Date.now()}`,
+                type: "data",
+                amount: amount,  // Ensure the correct amount is stored
+                status: "failed",
+                created_at: new Date().toISOString()
+            };
+            await addTransactionHistory(userId, transactionData);
+    
+            alert("⚠️ Data purchase failed. Please try again.");
+        }
+    }); 
+
 });
+
+async function addTransactionHistory(userId, transactionData) {
+    try {
+        console.log("📤 Sending Transaction:", transactionData);
+        console.log("🔍 User ID for request:", userId);
+
+        const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(transactionData),
+        });
+
+        const contentType = response.headers.get("content-type");
+
+        if (!response.ok) {
+            console.error(`❌ Server responded with status: ${response.status}`);
+            const errorText = await response.text();
+            throw new Error(errorText);
+        }
+
+        // Check if response is JSON
+        if (contentType && contentType.includes("application/json")) {
+            const result = await response.json();
+            console.log("📌 Transaction saved:", result);
+        } else {
+            const textResponse = await response.text();
+            console.error("❌ Unexpected Response (Not JSON):", textResponse);
+        }
+    } catch (error) {
+        console.error("❌ Error saving transaction:", error);
+    }
+}
+
+async function processPayment(network, planId, phone, amount) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (Math.random() > 0.2) {
+                resolve({ success: true });
+            } else {
+                reject(new Error("Payment failed"));
+            }
+        }, 2000);
+    });
+}

@@ -36,9 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
             // Check if the user has enough balance
             console.log(`Balance: ${userBalance}, Amount to Pay: ${amountToPay}`);
 
+            // if (userBalance >= amountToPay) {
+            //     console.log("✅ Balance is enough. Proceeding...");
+            //     verifyPinButton.dispatchEvent(new CustomEvent("balanceCheckedSuccess"));
+
             if (userBalance >= amountToPay) {
                 console.log("✅ Balance is enough. Proceeding...");
+                localStorage.setItem("amountToPay", amountToPay);  // Store amount in localStorage
                 verifyPinButton.dispatchEvent(new CustomEvent("balanceCheckedSuccess"));
+                        
             } else {
                 console.log("❌ Balance is NOT enough!");
                 alert("❌ Insufficient balance. Please fund your account.");

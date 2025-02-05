@@ -201,160 +201,34 @@ app.get('/Verified_Members/:user_id/transaction_histories', async (req, res) => 
 });
 
 
-// // API to add transaction history
-// app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) => {
-//   const { user_id } = req.params;
-//   const transactionData = req.body; // Transaction details sent from frontend
+// API to add transaction history
+app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) => {
+  const { user_id } = req.params;
+  const transactionData = req.body; // Transaction details sent from frontend
 
-//   try {
-//       // Find user by user_id
-//       const user = await User.findOne({ user_id });
-//       if (!user) {
-//           return res.status(404).json({ error: "User not found" });
-//       }
-
-//       // Append the new transaction to transaction_histories array
-//       user.transaction_histories.push(transactionData);
-
-//       // Save updated user data
-//       await user.save();
-//       res.json({ success: true, message: "Transaction history added successfully" });
-
-//   } catch (error) {
-//       console.error("Error saving transaction:", error);
-//       res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
-
-
-
-app.post("/Verified_Members/:userId/transaction_histories", async (req, res) => {
   try {
-      const { userId } = req.params;
-      const { transaction_id, type, amount, status, created_at } = req.body;
-
-      // Find the user by user_id
-      const user = await Verified_Members.findOne({ user_id: userId });
+      // Find user by user_id
+      const user = await User.findOne({ user_id });
       if (!user) {
           return res.status(404).json({ error: "User not found" });
       }
 
-      // Push transaction to the array
-      user.transaction_histories.push({ transaction_id, type, amount, status, created_at });
-      await user.save();
+      // Append the new transaction to transaction_histories array
+      user.transaction_histories.push(transactionData);
 
-      res.status(200).json({ message: "Transaction added successfully" });
+      // Save updated user data
+      await user.save();
+      res.json({ success: true, message: "Transaction history added successfully" });
+
   } catch (error) {
-      console.error("Server error:", error);
-      res.status(500).json({ error: "Internal server error" });
+      console.error("Error saving transaction:", error);
+      res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 
 
 
-
-
-
-
-
-
-
-
-// app.post('/reset-password', async (req, res) => {
-//   const { user_id, newPassword } = req.body;
-
-//   try {
-//     const user = await User.findOne({ user_id });
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     const hashedPassword = await bcrypt.hash(newPassword, 10);
-//     user.password = hashedPassword;
-//     await user.save();
-
-//     return res.status(200).json({ message: "Password changed successfully" });
-//   } catch (error) {
-//     console.error("Password reset error:", error);
-//     return res.status(500).json({ message: "Internal server error" });
-//   }
-// });
-
-
-
-
-
-// // Nodemailer configuration
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.EMAIL_USER,  // Set in .env file
-//     pass: process.env.EMAIL_PASS   // Set in .env file
-//   }
-// });
-
-// // Request Password Reset (Sends email with token)
-// app.post('/request-password-reset', async (req, res) => {
-//   const { email } = req.body;
-
-//   try {
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       return res.status(400).json({ message: 'User with this email not found' });
-//     }
-
-//     const token = jwt.sign({ user_id: user.user_id }, RESET_SECRET, { expiresIn: '15m' });
-
-//     // Send email with reset link
-//     const resetLink = `http://localhost:3000/reset-password?token=${token}`;
-//     const mailOptions = {
-//       from: process.env.EMAIL_USER,
-//       to: email,
-//       subject: 'Password Reset Request',
-//       html: `<p>Click <a href="${resetLink}">here</a> to reset your password. This link expires in 15 minutes.</p>`
-//     };
-
-//     await transporter.sendMail(mailOptions);
-//     return res.status(200).json({ message: 'Password reset email sent' });
-//   } catch (error) {
-//     console.error('Password reset request error:', error);
-//     return res.status(500).json({ message: 'Internal server error' });
-//   }
-// });
-
-// // Reset Password (Validates token and updates password)
-// app.post('/reset-password', async (req, res) => {
-//   const { token, newPassword } = req.body;
-
-//   try {
-//     const decoded = jwt.verify(token, RESET_SECRET);
-//     const user = await User.findOne({ user_id: decoded.user_id });
-
-//     if (!user) {
-//       return res.status(400).json({ message: 'Invalid token or user not found' });
-//     }
-
-//     const hashedPassword = await bcrypt.hash(newPassword, 10);
-//     user.password = hashedPassword;
-//     await user.save();
-
-//     return res.status(200).json({ message: 'Password has been reset successfully' });
-//   } catch (error) {
-//     console.error('Password reset error:', error);
-//     return res.status(500).json({ message: 'Invalid or expired token' });
-//   }
-// });
-
-
-
-
-
-
-
-
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
