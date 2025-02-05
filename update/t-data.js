@@ -1,7 +1,7 @@
 const API_BASE_URL = "http://localhost:3000/Verified_Members";
 const DATA_API_URL = "http://localhost:5000/proxy/data";
 const AUTH_TOKEN = "8f00fa816b1e3b485baca8f44ae5d361ef803311";
-
+// import addTransactionHistory from './addTransactionHistory';
 
 const networkMap = {
     "1": "MTN",
@@ -225,18 +225,17 @@ async function getPlanPrice(planId) {
 
 
 
-
-
-
-///Updating of transaction histories
 document.addEventListener("DOMContentLoaded", () => {
     const verifyPinButton = document.getElementById("verifypin");
     const payNowButton = document.getElementById("paynow");
     const closeModalButton = document.getElementById("closeModal");
     const modal = document.getElementById("paymentModal");
 
+    // Only runs if balance check passes
     verifyPinButton.addEventListener("balanceCheckedSuccess", async () => {
-        const pin = [...document.querySelectorAll(".pin-input")].map(input => input.value).join("");
+        const pin = [...document.querySelectorAll(".pin-input")]
+            .map(input => input.value)
+            .join("");
 
         if (pin.length !== 4) {
             alert("Please enter a 4-digit PIN.");
@@ -250,6 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
+            // Set modal content
             document.getElementById("selected-network").innerText =
                 networkMap[document.getElementById("network-select").value];
             document.getElementById("selected-plan").innerText =
@@ -257,6 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("selected-phone").innerText =
                 document.getElementById("phone-number").value;
 
+            // Show the modal
             modal.style.display = "block";
         } catch (error) {
             alert("⚠️ Error processing request. Please try again.");
@@ -264,153 +265,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Close the modal
     closeModalButton.addEventListener("click", () => {
         modal.style.display = "none";
     });
 
+    // Pay Now event listener
     payNowButton.addEventListener("click", async () => {
         alert("Processing payment...");
         modal.style.display = "none";
-
-        const userId = localStorage.getItem("user_id") || localStorage.getItem("User_id");
-        if (!userId) {
-            alert("User not authenticated. Please log in.");
-            return;
-        }
-
-        const amount = parseFloat(document.getElementById("amount-to-pay").value.trim());
-        const phone = document.getElementById("phone-number").value.trim();
-        const network = document.getElementById("network-select").value;
-        const planId = document.getElementById("preferable-plan").value;
-
-        try {
-            const response = await processPayment(network, planId, phone, amount);
-            console.log("✅ Payment Response:", response);
-
-            const transactionData = {
-                transaction_id: `trans_${Date.now()}`,
-                type: "data",
-                amount: amount,
-                status: "success",
-                created_at: new Date().toISOString()
-            };
-            await addTransactionHistory(userId, transactionData);
-
-            alert("✅ Success! Data purchased successfully.");
-        } catch (error) {
-            console.error("Error processing data purchase:", error);
-
-            const transactionData = {
-                transaction_id: `trans_${Date.now()}`,
-                type: "data",
-                amount: amount,
-                status: "failed",
-                created_at: new Date().toISOString()
-            };
-            await addTransactionHistory(userId, transactionData);
-
-            alert("⚠️ Data purchase failed. Please try again.");
-        }
     });
 });
-
-async function addTransactionHistory(userId, transactionData) {
-    try {
-        const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(transactionData)
-        });
-
-        const result = await response.json();
-        console.log("📌 Transaction saved:", result);
-    } catch (error) {
-        console.error("❌ Error saving transaction:", error);
-    }
-}
-
-async function processPayment(network, planId, phone, amount) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (Math.random() > 0.2) {
-                resolve({ success: true });
-            } else {
-                reject(new Error("Payment failed"));
-            }
-        }, 2000);
-    });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const verifyPinButton = document.getElementById("verifypin");
-//     const payNowButton = document.getElementById("paynow");
-//     const closeModalButton = document.getElementById("closeModal");
-//     const modal = document.getElementById("paymentModal");
-
-//     // Only runs if balance check passes
-//     verifyPinButton.addEventListener("balanceCheckedSuccess", async () => {
-//         const pin = [...document.querySelectorAll(".pin-input")]
-//             .map(input => input.value)
-//             .join("");
-
-//         if (pin.length !== 4) {
-//             alert("Please enter a 4-digit PIN.");
-//             return;
-//         }
-
-//         const isValid = await validatePin(pin);
-//         if (!isValid) {
-//             alert("❌ Invalid PIN. Please try again.");
-//             return;
-//         }
-
-//         try {
-//             // Set modal content
-//             document.getElementById("selected-network").innerText =
-//                 networkMap[document.getElementById("network-select").value];
-//             document.getElementById("selected-plan").innerText =
-//                 document.getElementById("preferable-plan").selectedOptions[0].text;
-//             document.getElementById("selected-phone").innerText =
-//                 document.getElementById("phone-number").value;
-
-//             // Show the modal
-//             modal.style.display = "block";
-//         } catch (error) {
-//             alert("⚠️ Error processing request. Please try again.");
-//             console.error(error);
-//         }
-//     });
-
-//     // Close the modal
-//     closeModalButton.addEventListener("click", () => {
-//         modal.style.display = "none";
-//     });
-
-//     // Pay Now event listener
-//     payNowButton.addEventListener("click", async () => {
-//         alert("Processing payment...");
-//         modal.style.display = "none";
-//     });
-// });

@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         planSelect.innerHTML = '<option value="" disabled selected>Choose your desired plan</option>';
         amountInput.value = "";
 
-        console.log("Selected Network ID:", selectedNetworkId);
-        console.log("Mapped Network Name:", selectedNetwork);
+        // console.log("Selected Network ID:", selectedNetworkId);
+        // console.log("Mapped Network Name:", selectedNetwork);
 
         if (plans[selectedNetwork]) {
             plans[selectedNetwork].forEach(plan => {
@@ -31,9 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 planSelect.appendChild(option);
             });
 
-            console.log("Plans loaded:", plans[selectedNetwork]);
+            // console.log("Plans loaded:", plans[selectedNetwork]);
         } else {
-            console.log("No plans found for:", selectedNetwork);
+            // console.log("No plans found for:", selectedNetwork);
         }
     }
 

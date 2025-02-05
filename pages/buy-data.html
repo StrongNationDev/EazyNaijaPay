@@ -1,84 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Data</title>
-    <link rel="stylesheet" href="../css/buy-data.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Data</title>
+  <link rel="stylesheet" href="../css/buy-data.css">
+</head>
 
-  <body>
-    <!-- Header Section -->
-    <header class="header">
-      <a href="../pages/Dashboard.html" class="back-btn">&#8592; <span>Back</span></a>
-      <h1 class="title">Available Data Networks to Buy</h1>
-      <a href="t.me/VTUAgentHelperBot" class="chat-btn">
-        <img src="../assets/chat-icon.png" alt="Chat Icon">
-      </a>
-    </header>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <a href="../pages/Dashboard.html" class="back-btn">&#8592; <span>Back</span></a>
+    <h1 class="title">Available Data Networks to Buy</h1>
+    <a href="t.me/VTUAgentHelperBot" class="chat-btn">
+      <img src="../assets/chat-icon.png" alt="Chat Icon">
+    </a>
+  </header>
 
-    <!-- Main Content -->
-    <section class="container">
-      <!-- Network Dropdown -->
-      <div class="up-input-group">
-        <label class="dropdown-label">
-          <img src="../assets/select.png" alt="Network Icon" id="selected-icon" class="network-icon">
-          <select id="network-select" class="dropdown">
-            <option value="" disabled selected>Select a Network</option>
-            <option value="1" network_id="1" data-icon="../assets/mtn.png">MTN</option>
-            <option value="2" network_id="2" data-icon="../assets/glo-icon.png">GLO</option>
-            <option value="3" network_id="3" data-icon="../assets/9mobile-icon.png">9 Mobile</option>
-            <option value="4" network_id="4" data-icon="../assets/airtel-icon.png">Airtel</option>
-          </select>
-        </label>
-      </div>
-      
-      <!-- Select Preferable Plan -->
-      <div class="input-group">
-        <label for="preferable-plan" class="label-text">Select Preferable Plan</label>
-        <select id="preferable-plan" class="dropdown">
-          <option value="" plan_id="" disabled selected>Choose your desired plan</option>
+  <!-- Main Content -->
+  <section class="container">
+    <!-- Network Dropdown -->
+    <div class="up-input-group">
+      <label class="dropdown-label">
+        <img src="../assets/select.png" alt="Network Icon" id="selected-icon" class="network-icon">
+        <select id="network-select" class="dropdown">
+          <option value="" disabled selected>Select a Network</option>
+          <option value="1" data-icon="../assets/mtn.png">MTN</option>
+          <option value="2" data-icon="../assets/glo-icon.png">GLO</option>
+          <option value="3" data-icon="../assets/9mobile-icon.png">9 Mobile</option>
+          <option value="4" data-icon="../assets/airtel-icon.png">Airtel</option>
         </select>
+      </label>
+    </div>
+
+    <!-- Select Preferable Plan -->
+    <div class="input-group">
+      <label for="preferable-plan" class="label-text">Select Preferable Plan</label>
+      <select id="preferable-plan" class="dropdown">
+        <option value="" disabled selected>Choose your desired plan</option>
+      </select>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="input-group">
+      <label for="phone-number" class="label-text">Phone Number</label>
+      <input type="text" id="phone-number" placeholder="Enter Destination Phone Number" class="input-field">
+      <img src="../assets/phone.png" alt="Phone Icon" class="field-icon">
+    </div>
+
+    <!-- Amount to Pay -->
+    <div class="input-group">
+      <label for="amount-to-pay" class="label-text">Amount to Pay</label>
+      <div class="input-wrapper">
+        <span class="currency-icon">₦</span>
+        <input type="text" id="amount-to-pay" placeholder="0.00" class="input-field">
+        <!-- <input type="text" id="amount-to-pay" placeholder="0.00" class="input-field" readonly> -->
       </div>
+    </div>
 
-      <!-- Phone Number -->
-      <div class="input-group">
-        <label for="phone-number" class="label-text">Phone Number</label>
-        <input type="text" id="phone-number" placeholder="Enter Destination Phone Number" class="input-field">
-        <img src="../assets/phone.png" alt="Phone Icon" class="field-icon">
+    <!-- Verify Pin -->
+    <div id="verify-pin" class="pin-section">
+      <label class="label-text">Verify Pin</label>
+      <div class="pin-inputs">
+        <input type="password" maxlength="1" id="pin1" class="pin-input">
+        <input type="password" maxlength="1" id="pin2" class="pin-input">
+        <input type="password" maxlength="1" id="pin3" class="pin-input">
+        <input type="password" maxlength="1" id="pin4" class="pin-input">
       </div>
+      <p id="pin-error-message" style="color: red;"></p>
+    </div>
 
-      <!-- Amount to Pay -->
-      <div class="input-group">
-        <label for="amount-to-pay" class="label-text">Amount to Pay</label>
-        <div class="input-wrapper">
-          <span class="currency-icon">₦</span>
-          <input type="text" id="amount-to-pay" placeholder="0.00" class="input-field" readonly>
-        </div>
-      </div>
+    <!-- Verify PIN Button -->
+    <button class="continue-btn" id="verifypin">Continue to Pay</button>
+  </section>
 
-      <!-- Verify Pin -->
-      <div id="verify-pin" class="pin-section">
-        <label class="label-text">Verify Pin</label>
-        <div class="pin-inputs">
-          <input type="password" maxlength="1" id="pin1" class="pin-input">
-          <input type="password" maxlength="1" id="pin2" class="pin-input">
-          <input type="password" maxlength="1" id="pin3" class="pin-input">
-          <input type="password" maxlength="1" id="pin4" class="pin-input">
-        </div>
-      </div>
+  <!-- Modal Structure -->
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <h2>Confirm Your Purchase</h2>
+      <p><strong>Network:</strong> <span id="selected-network"></span></p>
+      <p><strong>Plan:</strong> <span id="selected-plan"></span></p>
+      <p><strong>Phone Number:</strong> <span id="selected-phone"></span></p>
+      <button id="paynow" class="modal-button">Pay Now</button>
+      <button id="closeModal" class="modal-button">Cancel</button>
+    </div>
+  </div>
 
-      <!-- Continue Button -->
-      <button class="continue-btn" id="paynow">Continue to Pay</button>
-    </section>
+  <script src="../update/auth.js"></script>
+  <script src="../update/fetch-plans.js" type="module"></script>
+  <script src="../update/balancecheck.js"></script>
+  <!-- <script src="../update/data.js"></script> -->
+  <script type="module" src="../update/data.js"></script>
+  <!-- <script src="../update/t-data.js"></script> -->
 
-    <script src="../update/auth.js"></script>
-    <script src="../update/fetch-plans.js" type="module"></script>
-    <script src="../update/data.js" type="module"></script>
-
-
-
-        <!-- script for making pin interactive -->
+    <!-- script for making pin interactive -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
           const inputs = document.querySelectorAll(".pin-input");
@@ -105,68 +120,5 @@
       });
     </script>
 
-
-
-  </body>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-    <!-- JavaScript for selecting amount --
-    <script>
-      function enableInput(input) {
-        input.removeAttribute('readonly');
-      }
-
-      function disableInput(input) {
-        input.setAttribute('readonly', true);
-      }
-
-      function validateAmount(input) {
-        input.value = input.value.replace(/[^\d]/g, '');
-      }
-
-      function setAmount(amount) {
-        const input = document.getElementById('amount');
-        input.value = amount;
-      }
-    </script> -->
-
-
-
-
-
-
-<!-- 
-    <script>
-      // Handle Network Dropdown
-      const dropdown = document.getElementById('network-select'); // Corrected to match the HTML `id`
-      const selectedIcon = document.getElementById('selected-icon');
-      
-      dropdown.addEventListener('change', function () {
-        const selectedOption = dropdown.options[dropdown.selectedIndex]; // Get the selected option
-        const newIcon = selectedOption.getAttribute('data-icon'); // Retrieve the `data-icon` attribute
-
-        if (newIcon) {
-          selectedIcon.src = newIcon;
-        }
-      });
-
-      // Set Airtime Amount
-      function setAmount(amount) {
-        document.getElementById('amount').value = `₦ ${amount}`;
-      }
-    </script> -->
-

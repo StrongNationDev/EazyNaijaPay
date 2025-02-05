@@ -99,25 +99,6 @@ app.get('/Verified_Members', async (req, res) => {
 });
 
 
-
-// // Fetch User by ID
-// app.get('/Verified_Members/:user_id', async (req, res) => {
-//   const { user_id } = req.params;
-
-//   try {
-//     const user = await User.findOne({ user_id }, { user_id: 1, username: 1, email: 1, phone: 1 });
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-//     return res.status(200).json(user);
-//   } catch (error) {
-//     console.error('Error fetching user:', error);
-//     return res.status(500).json({ message: 'Internal server error' });
-//   }
-// });
-
-
 // Fetch User by ID (with pin and transaction_histories)
 app.get('/Verified_Members/:user_id', async (req, res) => {
   const { user_id } = req.params;
@@ -156,13 +137,6 @@ app.get('/Verified_Members/:user_id/pin', async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
-
-
-
-
-
-
-
 
 // Set PIN for a specific user
 app.post('/Verified_Members/:user_id/set-pin', async (req, res) => {
@@ -227,8 +201,54 @@ app.get('/Verified_Members/:user_id/transaction_histories', async (req, res) => 
 });
 
 
+// // API to add transaction history
+// app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) => {
+//   const { user_id } = req.params;
+//   const transactionData = req.body; // Transaction details sent from frontend
+
+//   try {
+//       // Find user by user_id
+//       const user = await User.findOne({ user_id });
+//       if (!user) {
+//           return res.status(404).json({ error: "User not found" });
+//       }
+
+//       // Append the new transaction to transaction_histories array
+//       user.transaction_histories.push(transactionData);
+
+//       // Save updated user data
+//       await user.save();
+//       res.json({ success: true, message: "Transaction history added successfully" });
+
+//   } catch (error) {
+//       console.error("Error saving transaction:", error);
+//       res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
 
+
+app.post("/Verified_Members/:userId/transaction_histories", async (req, res) => {
+  try {
+      const { userId } = req.params;
+      const { transaction_id, type, amount, status, created_at } = req.body;
+
+      // Find the user by user_id
+      const user = await Verified_Members.findOne({ user_id: userId });
+      if (!user) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      // Push transaction to the array
+      user.transaction_histories.push({ transaction_id, type, amount, status, created_at });
+      await user.save();
+
+      res.status(200).json({ message: "Transaction added successfully" });
+  } catch (error) {
+      console.error("Server error:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
 
