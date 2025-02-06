@@ -55,37 +55,38 @@ async function checkBalance(amount) {
     }
 }
 
-async function updateBalance(amount) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/${userId}/Balance`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ amount: -amount }),
-        });
+// async function updateBalance(amount) {
+//     try {
+//         const response = await fetch(`${API_BASE_URL}/${userId}/Balance`, {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({ amount: -amount }),
+//         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Response Error:", errorData.message);
-            throw new Error(errorData.message || "Failed to update balance.");
-        }
+//         if (!response.ok) {
+//             const errorData = await response.json();
+//             console.error("Response Error:", errorData.message);
+//             throw new Error(errorData.message || "Failed to update balance.");
+//         }
 
-        const data = await response.json();
-        if (data.success) {
-            console.log("Balance updated successfully. Remaining Balance:", data.balance);
-            return { success: true, balance: data.balance };
-        } else {
-            throw new Error(data.message || "Balance update failed.");
-        }
-    } catch (error) {
-        console.error("Error updating balance:", error.message);
-        alert("Failed to update balance. Please try again.");
-        return { success: false, message: error.message };
-    }
-}
+//         const data = await response.json();
+//         if (data.success) {
+//             console.log("Balance updated successfully. Remaining Balance:", data.balance);
+//             return { success: true, balance: data.balance };
+//         } else {
+//             throw new Error(data.message || "Balance update failed.");
+//         }
+//     } catch (error) {
+//         console.error("Error updating balance:", error.message);
+//         alert("Failed to update balance. Please try again.");
+//         return { success: false, message: error.message };
+//     }
+// }
 
 // Buy data function
+
 async function buyData(networkId, planId, phone) {
     try {
         // Fetch price based on plan ID (implement this function if needed)
@@ -360,3 +361,32 @@ async function processPayment(network, planId, phone, amount) {
         }, 2000);
     });
 }
+
+// Function to update the user's balance after a successful data purchase
+async function updateBalance(userId, amount) {
+    try {
+      console.log("🔄 Updating balance with amount:", amount);
+  
+      const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/deduct_balance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to update balance.");
+      }
+  
+      const data = await response.json();
+  
+      console.log("✅ Balance successfully updated:", data.balance);
+      return { success: true, balance: data.balance };
+    } catch (error) {
+      console.error("❌ Error updating balance:", error.message);
+      return { success: false, message: error.message };
+    }
+  }
+  

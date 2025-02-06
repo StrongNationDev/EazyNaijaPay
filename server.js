@@ -181,6 +181,38 @@ app.get('/Verified_Members/:user_id/balance', async (req, res) => {
 });
 
 
+// Endpoint to deduct amount from user's balance
+app.post("/Verified_Members/:user_id/deduct_balance", async (req, res) => {
+  const { user_id } = req.params;
+  const { amount } = req.body;
+
+  try {
+      const user = await User.findOne({ user_id });
+
+      if (!user) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      if (!amount || isNaN(amount) || amount <= 0) {
+          return res.status(400).json({ error: "Invalid amount" });
+      }
+
+      if (user.balance < amount) {
+          return res.status(400).json({ error: "Insufficient balance" });
+      }
+
+      user.balance -= amount;
+      await user.save();
+
+      res.json({ success: true, message: "Balance deducted successfully", balance: user.balance });
+
+  } catch (error) {
+      console.error("Error deducting balance:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
 
 // Fetch Transaction Histories by user_id
 app.get('/Verified_Members/:user_id/transaction_histories', async (req, res) => {
@@ -204,19 +236,16 @@ app.get('/Verified_Members/:user_id/transaction_histories', async (req, res) => 
 // API to add transaction history
 app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) => {
   const { user_id } = req.params;
-  const transactionData = req.body; // Transaction details sent from frontend
+  const transactionData = req.body;
 
   try {
-      // Find user by user_id
       const user = await User.findOne({ user_id });
       if (!user) {
           return res.status(404).json({ error: "User not found" });
       }
 
-      // Append the new transaction to transaction_histories array
       user.transaction_histories.push(transactionData);
 
-      // Save updated user data
       await user.save();
       res.json({ success: true, message: "Transaction history added successfully" });
 

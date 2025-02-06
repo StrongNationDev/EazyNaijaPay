@@ -46,39 +46,40 @@ async function checkBalance(amount) {
 }
 
 
-async function updateBalance(amount) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/${userId}/Balance`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ amount: -amount }),
-        });
+// async function updateBalance(amount) {
+//     try {
+//         const response = await fetch(`${API_BASE_URL}/${userId}/Balance`, {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({ amount: -amount }),
+//         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Response Error:", errorData.message);
-            throw new Error(errorData.message || "Failed to update balance.");
-        }
+//         if (!response.ok) {
+//             const errorData = await response.json();
+//             console.error("Response Error:", errorData.message);
+//             throw new Error(errorData.message || "Failed to update balance.");
+//         }
 
-        const data = await response.json();
-        if (data.success) {
-            console.log("Balance updated successfully. Remaining Balance:", data.balance);
-            return { success: true, balance: data.balance };
-        } else {
-            throw new Error(data.message || "Balance update failed.");
-        }
-    } catch (error) {
-        console.error("Error updating balance:", error.message);
-        alert("Failed to update balance. Please try again.");
-        return { success: false, message: error.message };
-    }
-}
+//         const data = await response.json();
+//         if (data.success) {
+//             console.log("Balance updated successfully. Remaining Balance:", data.balance);
+//             return { success: true, balance: data.balance };
+//         } else {
+//             throw new Error(data.message || "Balance update failed.");
+//         }
+//     } catch (error) {
+//         console.error("Error updating balance:", error.message);
+//         alert("Failed to update balance. Please try again.");
+//         return { success: false, message: error.message };
+//     }
+// }
 
 
 
 // buy airtime function
+
 async function buyAirtime(networkId, amount, phone) {
     try {
         const balanceCheck = await checkBalance(amount);
@@ -156,62 +157,30 @@ document.getElementById("paynow").addEventListener("click", async () => {
 
 
 
+// Function to update balance after a successful airtime purchase
+async function updateBalance(userId, amount) {
+    try {
+        console.log("🔄 Deducting balance for airtime purchase:", amount);
 
+        const response = await fetch(`${API_BASE_URL}/${userId}/deduct_balance`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ amount }), // Amount is already negative
+        });
 
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to update balance.");
+        }
 
+        const data = await response.json();
+        console.log("✅ Balance updated successfully. Remaining Balance:", data.balance);
+        return { success: true, balance: data.balance };
 
-
-
-
-
-
-
-
-
-//UsersTransactions.js
-// const UserTransaction = require("../models/User");
-
-// Function to save airtime transaction (COMING BACK TO WORK HERE)
-//async function saveAirtimeTransaction(networkId, amount, phone, status) {
-//    try {
-//        const transactionData = {
-//            network: networkId,
-//            amount,
-//            phone,
-//            status,
-//            user_id: userId,
-//        };
-//        console.log("Saving transaction:", transactionData);
-//    } catch (error) {
-//        console.error("Error saving airtime transaction:", error);
-//    }
-//}
-
-
-
-// async function saveAirtimeTransaction(networkId, amount, phone, status, userId) {
-//   try {
-//     const transactionData = {
-//       networkId,
-//       amount,
-//       phone,
-//       status,
-//       type: "airtime", // Mark this as an airtime transaction
-//     };
-
-//     // Upsert: Add a new transaction under the user's transactions
-//     const result = await UserTransaction.findOneAndUpdate(
-//       { User_id: userId },
-//       { $push: { transactions: transactionData } }, // Add the transaction
-//       { upsert: true, new: true } // Create if doesn't exist
-//     );
-
-//     console.log("Airtime transaction saved:", result);
-//   } catch (error) {
-//     console.error("Error saving airtime transaction:", error);
-//   }
-// }
-
-// module.exports = { saveAirtimeTransaction };
-
-
+    } catch (error) {
+        console.error("❌ Error updating balance:", error.message);
+        return { success: false, message: error.message };
+    }
+}
