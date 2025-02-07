@@ -233,7 +233,7 @@ app.get('/Verified_Members/:user_id/transaction_histories', async (req, res) => 
 });
 
 
-// API to add transaction history
+// API to add transaction history for data and airtime
 app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) => {
   const { user_id } = req.params;
   const transactionData = req.body;

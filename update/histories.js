@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               const statusClass = history.status === 'success' ? 'success' : 'failed';
               activityCard.innerHTML = `
                   <h4>${history.type === 'data' ? 'Data Purchase' : 'Top Up'} ${history.status === 'success' ? 'Successful' : 'Failed'}</h4>
-                  <p>${history.type === 'data' ? `You bought ${history.amount} NGN worth of data` : `You funded your account with ${history.amount} NGN`}</p>
+                  <p>${history.type === 'data' ? `You bought ${history.amount} NGN worth of data` : `You have bought ${history.amount} NGN Airtime`}</p>
                   <span>${new Date(history.created_at).toLocaleDateString()} ${new Date(history.created_at).toLocaleTimeString()}</span>
                   <span id="ref">Transaction ID: ${history._id}</span>
               `;
