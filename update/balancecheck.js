@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const userId = localStorage.getItem("user_id") || localStorage.getItem("User_id");
         if (!userId) {
-            alert("User not authenticated. Please log in.");
+            showAlert("User not authenticated. Please log in.");
             return;
         }
 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Cleaned Amount to Pay:", amountToPay); 
             
             if (!amountToPay || isNaN(amountToPay)) {
-                alert("⚠️ Amount to pay is invalid. Please refresh the page.");
+                showAlert("⚠️ Amount to pay is invalid. Please refresh the page.");
                 return;
             }
 
@@ -47,11 +47,60 @@ document.addEventListener("DOMContentLoaded", () => {
                         
             } else {
                 console.log("❌ Balance is NOT enough!");
-                alert("❌ Insufficient balance. Please fund your account.");
+                showAlert("❌ Insufficient balance. Please fund your account.");
             }
         } catch (error) {
             console.error("Error fetching balance:", error);
-            alert("⚠️ Error checking balance. Try again later.");
+            showAlert("⚠️ Error checking balance. Try again later.");
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Alerting users with notification function
+
+function showAlert(message) {
+    // Remove any existing alert
+    const existingAlert = document.getElementById("custom-alert");
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+
+    // Create the alert container
+    const alertBox = document.createElement("div");
+    alertBox.id = "custom-alert";
+    alertBox.textContent = message;
+
+    // Append alert to body
+    document.body.appendChild(alertBox);
+
+    // Play alert sound
+    const alertSound = new Audio("../pages/alert/notification-alert.mp3");
+    alertSound.play();
+
+    // Show animation
+    setTimeout(() => {
+        alertBox.classList.add("show");
+    }, 100);
+
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+        alertBox.classList.remove("show");
+        setTimeout(() => alertBox.remove(), 500);
+    }, 3000);
+}

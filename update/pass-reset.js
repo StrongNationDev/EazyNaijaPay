@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const user_id = localStorage.getItem("user_id"); // Get user_id from localStorage
   
       if (!newPassword) {
-        alert("Please enter a new password.");
+        showAlert("Please enter a new password.");
         return;
       }
   
@@ -43,14 +43,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const data = await response.json();
   
         if (response.ok) {
-          alert("Password changed successfully!");
+          showAlert("Password changed successfully!");
           modal.style.display = "none";
         } else {
-          alert("Error: " + data.message);
+          showAlert("Error: " + data.message);
         }
       } catch (error) {
         console.error("Error:", error);
-        alert("Something went wrong. Please try again.");
+        showAlert("Something went wrong. Please try again.");
       }
     });
   });
@@ -70,43 +70,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+// Alerting users with notification function
 
+function showAlert(message) {
+  // Remove any existing alert
+  const existingAlert = document.getElementById("custom-alert");
+  if (existingAlert) {
+      existingAlert.remove();
+  }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     const resetPasswordBtn = document.querySelector(".change-pin");
-    
-//     resetPasswordBtn.addEventListener("click", function () {
-//         const email = prompt("Enter your registered email:");
-//         if (!email) return;
+  // Create the alert container
+  const alertBox = document.createElement("div");
+  alertBox.id = "custom-alert";
+  alertBox.textContent = message;
 
-//         fetch("http://localhost:3000/request-password-reset", {
-//             method: "POST",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify({ email })
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.message === "Reset token sent") {
-//                 const token = prompt("Enter the reset token sent to your email:");
-//                 if (!token) return;
+  // Append alert to body
+  document.body.appendChild(alertBox);
 
-//                 const newPassword = prompt("Enter your new password:");
-//                 if (!newPassword) return;
+  // Play alert sound
+  const alertSound = new Audio("./alert/notification-alert.mp3");
+  alertSound.play();
 
-//                 fetch("http://localhost:3000/reset-password", {
-//                     method: "POST",
-//                     headers: { "Content-Type": "application/json" },
-//                     body: JSON.stringify({ email, token, newPassword })
-//                 })
-//                 .then(response => response.json())
-//                 .then(result => {
-//                     alert(result.message);
-//                 })
-//                 .catch(error => console.error("Error:", error));
-//             } else {
-//                 alert(data.message);
-//             }
-//         })
-//         .catch(error => console.error("Error:", error));
-//     });
-// });
+  // Show animation
+  setTimeout(() => {
+      alertBox.classList.add("show");
+  }, 100);
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+      alertBox.classList.remove("show");
+      setTimeout(() => alertBox.remove(), 500);
+  }, 3000);
+}

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const userId = localStorage.getItem('user_id');
   if (!userId) {
-    alert('User ID not found. Please log in again.');
+    showAlert('User ID not found. Please log in again.');
     window.location.href = '../index.html';
     return;
   }
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Disagree with Terms
   document.querySelector('.modal-buttons button:last-child').addEventListener('click', () => {
     termsModal.style.display = 'none';
-    alert('You need to agree to the terms to use the dashboard.');
+    showAlert('You need to agree to the terms to use the dashboard.');
     window.location.href = '../index.html';
   });
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   continueButton.addEventListener('click', async () => {
     const pin = Array.from(pinInputs).map(input => input.value).join('');
     if (pin.length !== 4 || !/^\d{4}$/.test(pin)) {
-      alert('Please enter a valid 4-digit PIN.');
+      showAlert('Please enter a valid 4-digit PIN.');
       return;
     }
 
@@ -63,19 +63,62 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.message);
+        showAlert(data.message);
         pinModal.style.display = 'none';
         localStorage.setItem('isPinSet', 'true');
 
         console.log("PIN successfully set. isPinSet:", localStorage.getItem('isPinSet'));
       } else {
-        alert(data.message);
+        showAlert(data.message);
       }
     } catch (error) {
       console.error('Error setting PIN:', error);
-      alert('Failed to set PIN. Please try again later.');
+      showAlert('Failed to set PIN. Please try again later.');
     }
   });
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+// Alerting users with notification function
+
+function showAlert(message) {
+  // Remove any existing alert
+  const existingAlert = document.getElementById("custom-alert");
+  if (existingAlert) {
+      existingAlert.remove();
+  }
+
+  // Create the alert container
+  const alertBox = document.createElement("div");
+  alertBox.id = "custom-alert";
+  alertBox.textContent = message;
+
+  // Append alert to body
+  document.body.appendChild(alertBox);
+
+    // Play alert sound
+    const alertSound = new Audio("../pages/alert/notification-alert.mp3");
+    alertSound.play();
+
+  // Show animation
+  setTimeout(() => {
+      alertBox.classList.add("show");
+  }, 100);
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+      alertBox.classList.remove("show");
+      setTimeout(() => alertBox.remove(), 500);
+  }, 3000);
+}

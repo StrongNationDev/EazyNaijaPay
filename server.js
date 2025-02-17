@@ -186,6 +186,8 @@ app.post("/Verified_Members/:user_id/deduct_balance", async (req, res) => {
   const { user_id } = req.params;
   const { amount } = req.body;
 
+  console.log(`📥 Deduct Balance Request - User ID: ${user_id}, Amount: ${amount}`);
+  
   try {
       const user = await User.findOne({ user_id });
 
@@ -255,6 +257,24 @@ app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) =>
   }
 });
 
+
+
+// DELETE User Route (Modified for your API structure)
+app.delete("/Verified_Members/:user_id", async (req, res) => {
+  try {
+      const { user_id } = req.params;
+      const result = await VerifiedMember.findOneAndDelete({ user_id });
+
+      if (!result) {
+          return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({ message: "User deleted successfully" });
+  } catch (error) {
+      console.error("Error deleting user:", error);
+      res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 

@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 
 const AIRTIME_API_URL = "https://www.husmodata.com/api/topup/";
 const DATA_API_URL = "https://www.husmodata.com/api/data/";
+// const AUTH_TOKEN = "8f00fa816b1e3b485baca8f44ae5d361ef803311";
 const AUTH_TOKEN = "4e1232989bd072dc935c84de444f64025ce874f4";
 
 app.post("/proxy/topup", async (req, res) => {

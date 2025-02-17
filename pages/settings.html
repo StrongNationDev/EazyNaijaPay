@@ -17,7 +17,7 @@
 
         <div class="profile-section">
             <img src="../assets/profile-icon.png" alt="Profile Picture" class="profile-img">
-            <p id="Username" class="user-name">John Doe</p>
+            <p id="Username" class="user-name"></p>
             <p id="User_id" class="user-id">User Permit ID: </p>
         </div>
 
@@ -28,6 +28,8 @@
                 <li><a href="https://t.me/+aka-9aVdtQ01NjY8">Contact Support</a></li>
                 <!-- <li><a href="#" class="refer">Refer a Friend</a></li> -->
                 <!-- <li><a href="#" class="terminate">Terminate Account</a></li> -->
+                <li><a href="#" id="terminateBtn" class="terminate">Terminate Account</a></li>
+
             </ul>
         </div>
 
@@ -38,19 +40,6 @@
                 <p>Are you sure you want to terminate your account? This action cannot be undone.</p>
                 <button id="confirmTerminate" class="btn-danger">Confirm</button>
                 <button id="cancelTerminate" class="btn-secondary">Cancel</button>
-            </div>
-        </div>
-
-        <!-- Refer Modal -->
-        <div id="refer-modal" class="modal2">
-            <div class="modal-content2">
-                <button class="close-modal">×</button>
-                <p>You will get 100 NGN as rewards on each of your referrals that funds their account.</p>
-                <p>You will need to get your referral "User Permit ID" and "Username", send them to the administrator to get your reward within 24 hours.</p>
-                <div class="referral-link">
-                    <input id="referral-link" type="text" readonly value="https://t.me/EazyNaijaPayBot?start=referral">
-                    <button id="copy-link">Copy Referral Link</button>
-                </div>
             </div>
         </div>
 
@@ -69,10 +58,30 @@
         </nav>
     </div>
 
+    <script src="../update/profile.js"></script>
+    <script src="../update/auth.js"></script>
+    <script src="../update/pass-reset.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- Password Reset Modal -->
-    <div id="passwordResetModal" class="modal">
+    <!-- <div id="passwordResetModal" class="modal">
         <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Change Password</h2>
@@ -80,12 +89,4 @@
         <input type="password" id="newPassword" placeholder="Enter new password" required>
         <button id="savePassword">Save</button>
         </div>
-    </div>
-
-
-
-    <script src="../update/profile.js"></script>
-    <script src="../update/auth.js"></script>
-    <script src="../update/pass-reset.js"></script>
-</body>
-</html>
+    </div> -->

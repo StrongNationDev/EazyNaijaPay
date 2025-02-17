@@ -15,14 +15,14 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
   
       const data = await response.json();
       if (response.ok) {
-        alert(data.message);
+        showAlert(data.message);
         window.location.href = 'index.html';
       } else {
-        alert(data.message);
+        showAlert(data.message);
       }
     } catch (error) {
       console.error('Signup error:', error);
-      alert('An error occurred. Please try again.');
+      showAlert('An error occurred. Please try again.');
     }
   });
   
@@ -41,3 +41,63 @@ function togglePassword() {
       eyeIcon.innerHTML = '&#128065;'; // Default eye icon
     }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Alerting users with notification function
+
+function showAlert(message) {
+  // Remove any existing alert
+  const existingAlert = document.getElementById("custom-alert");
+  if (existingAlert) {
+      existingAlert.remove();
+  }
+
+  // Create the alert container
+  const alertBox = document.createElement("div");
+  alertBox.id = "custom-alert";
+  alertBox.textContent = message;
+
+  // Append alert to body
+  document.body.appendChild(alertBox);
+
+    // Play alert sound
+    const alertSound = new Audio("../pages/alert/notification-alert.mp3");
+    alertSound.play();
+
+  // Show animation
+  setTimeout(() => {
+      alertBox.classList.add("show");
+  }, 100);
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+      alertBox.classList.remove("show");
+      setTimeout(() => alertBox.remove(), 500);
+  }, 3000);
+}
