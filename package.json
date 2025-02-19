@@ -1,26 +1,30 @@
 {
-  "dependencies": {
-    "axios": "^1.7.9",
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
-    "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.12.0",
-    "mongoose": "^8.9.5",
-    "node-fetch": "^3.3.2"
-  },
-  "name": "eazynaijapay",
-  "version": "1.0.0",
-  "description": "��#\u0000 \u0000E\u0000a\u0000z\u0000y\u0000N\u0000a\u0000i\u0000j\u0000a\u0000P\u0000a\u0000y\u0000-\u0000C\u0000h\u0000a\u0000t\u0000A\u0000I\u0000\r\u0000 \u0000#\u0000 \u0000E\u0000a\u0000z\u0000y\u0000N\u0000a\u0000i\u0000j\u0000a\u0000P\u0000a\u0000y\u0000-\u0000C\u0000h\u0000a\u0000t\u0000A\u0000I\u0000\r\u0000 \u0000",
-  "main": "account-script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
-}
+    "dependencies": {
+      "axios": "^1.7.9",
+      "bcrypt": "^5.1.1",
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.20.3",
+      "cors": "^2.8.5",
+      "crypto": "^1.0.1",
+      "express": "^4.21.2",
+      "jsonwebtoken": "^9.0.2",
+      "mongodb": "^6.12.0",
+      "mongoose": "^8.9.5",
+      "node-fetch": "^3.3.2"
+    },
+    "name": "eazynaijapay",
+    "version": "1.0.0",
+    "description": "EazyNaijaPay-ChatAI",
+    "main": "account-script.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "engines": {
+      "node": "20.x"
+    }
+  }
+  
