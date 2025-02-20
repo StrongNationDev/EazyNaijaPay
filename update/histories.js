@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
       // Fetch the transaction histories for the logged-in user
-      const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`);
+      const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/transaction_histories`);
       if (!response.ok) {
           throw new Error('Failed to fetch transaction histories');
       }

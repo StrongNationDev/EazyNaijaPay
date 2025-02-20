@@ -9,7 +9,7 @@ async function updateBalance() {
     }
   
     try {
-      const apiUrl = `http://localhost:3000/Verified_Members/${userId}/balance`;
+      const apiUrl = `https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/balance`;
   
       const response = await fetch(apiUrl);
   

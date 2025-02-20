@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3000/Verified_Members";
+const API_BASE_URL = "https://eazynaijapay-server.onrender.com/Verified_Members";
 const AIRTIME_API_URL = "http://localhost:5000/proxy/topup";
 
 const networkMap = {

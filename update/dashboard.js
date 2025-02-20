@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/set-pin`, {
+      const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/set-pin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

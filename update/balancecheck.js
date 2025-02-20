@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/balance`);
+            const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/balance`);
             if (!response.ok) throw new Error("Failed to fetch balance.");
 
             const data = await response.json();

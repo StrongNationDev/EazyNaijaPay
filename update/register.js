@@ -7,7 +7,7 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
     const password = document.getElementById('password').value;
   
     try {
-      const response = await fetch('http://localhost:3000/signup', {
+      const response = await fetch('https://eazynaijapay-server.onrender.com/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, phone, username, password }),
