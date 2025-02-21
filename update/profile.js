@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Fetch username from API
         try {
-            const response = await fetch(`http://localhost:3000/Verified_Members/${userId}`);
+            const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}`);
             if (!response.ok) throw new Error("Failed to fetch user data");
 
             const data = await response.json();
@@ -39,58 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-// terminating account function
-// document.addEventListener("DOMContentLoaded", () => {
-//     const terminateBtn = document.getElementById("terminateBtn"); // Use ID instead of class
-//     const terminateModal = document.getElementById("terminateModal");
-//     const confirmTerminate = document.getElementById("confirmTerminate");
-//     const cancelTerminate = document.getElementById("cancelTerminate");
-
-//     if (!terminateBtn || !terminateModal || !confirmTerminate || !cancelTerminate) {
-//         console.error("One or more elements not found.");
-//         return;
-//     }
-
-//     // Show modal when clicking "Terminate Account"
-//     terminateBtn.addEventListener("click", (e) => {
-//         e.preventDefault();  // Prevent default link behavior
-//         terminateModal.classList.remove("hidden");
-//         terminateModal.style.display = "block"; // Ensure it's visible
-//     });
-
-//     // Hide modal on cancel
-//     cancelTerminate.addEventListener("click", () => {
-//         terminateModal.classList.add("hidden");
-//         terminateModal.style.display = "none";
-//     });
-
-//     // Handle account deletion
-//     confirmTerminate.addEventListener("click", async () => {
-//         const userId = getUserId(); // Ensure this function exists
-//         if (!userId) {
-//             alert("User not found. Please log in again.");
-//             return;
-//         }
-
-//         try {
-//             const response = await fetch(`http://localhost:3000/Verified_Members/${userId}`, {
-//                 method: "DELETE",
-//                 headers: { "Content-Type": "application/json" }
-//             });
-
-//             if (!response.ok) throw new Error("Failed to delete account");
-
-//             alert("Your account has been permanently deleted.");
-//             localStorage.clear();
-//             window.location.href = "/login.html";
-//         } catch (error) {
-//             console.error("Error deleting account:", error);
-//             alert("Error deleting account. Please try again.");
-//         }
-//     });
-// });
-
-
+// terminating account function still working on it;
 
 document.addEventListener("DOMContentLoaded", () => {
     const terminateBtn = document.getElementById("terminateBtn");

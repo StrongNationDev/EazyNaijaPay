@@ -197,6 +197,45 @@ document.getElementById("paynow").addEventListener("click", async () => {
 
 
 
+//Deleting of transaction histories
+async function clearTransactionHistory() {
+    const userId = getUserId();
+
+    if (!userId) {
+        alert("User ID not found. Please log in again.");
+        return;
+    }
+
+    const confirmDelete = confirm("⚠️ Warning: Once you clear your transaction history, you cannot get it back. Do you want to continue?");
+    if (!confirmDelete) return;
+
+    try {
+        const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("✅ Transaction history cleared successfully.");
+        } else {
+            alert(`❌ Failed to clear history: ${result.error || "Unknown error"}`);
+        }
+    } catch (error) {
+        console.error("Error clearing transaction history:", error);
+        alert("⚠️ An error occurred. Please try again.");
+    }
+}
+
+// Attach event listener to the Clear All button
+document.querySelector(".deleteicon").addEventListener("click", clearTransactionHistory);
+
+
+
+
 // Alerting users with notification function
 
 function showAlert(message) {

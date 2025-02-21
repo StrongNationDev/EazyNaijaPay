@@ -314,6 +314,32 @@ app.post("/Verified_Members/:user_id/transaction_histories", async (req, res) =>
 });
 
 
+// API to clear all transaction history for a user
+app.delete("/Verified_Members/:user_id/transaction_histories", async (req, res) => {
+  const { user_id } = req.params;
+
+  try {
+      const user = await User.findOne({ user_id });
+      if (!user) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      user.transaction_histories = []; // Clear all history
+      await user.save();
+
+      res.json({ success: true, message: "Transaction history cleared successfully" });
+
+  } catch (error) {
+      console.error("Error clearing transaction history:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
+
+
+
 
 // DELETE User Route (Modified for your API structure)
 app.delete("/Verified_Members/:user_id", async (req, res) => {

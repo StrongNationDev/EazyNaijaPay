@@ -1,144 +1,269 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    background: linear-gradient(to bottom, #3eb4ff, #4ce8c6);
-    color: #000;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-  }
-  
-  /* Header */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #3eb4ff, #4ce8c6);
+  color: #000;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.title {
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.back-btn {
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.chat-btn img {
+  width: 25px;
+  height: 25px;
+}
+
+/* Main Content */
+.container {
+  padding: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Input Group */
+.input-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.label-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Input Field with Icon */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  padding-left: 40px; /* Adjust space for icon */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  position: relative;
+}
+
+/* Icons inside Input Fields */
+.field-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+/* Dropdown Section */
+.dropdown-label {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  position: relative;
+}
+
+.network-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.dropdown {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* Amount Input */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  position: relative;
+}
+
+.currency-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-right: 5px;
+}
+
+/* Amount Selection Buttons */
+.amount-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.amount-btn {
+  background: #4dd0e1;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.amount-btn:hover {
+  background: #00bcd4;
+}
+
+/* Pin Section */
+.pin-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.pin-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pin-input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+/* Continue Button */
+.continue-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, #00bcd4, #0086c3);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.continue-btn:hover {
+  background: linear-gradient(to right, #0086c3, #006b9a);
+}
+
+/* 📌 Responsive Media Queries */
+@media screen and (max-width: 768px) {
   .header {
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    padding: 15px;
   }
-  
+
   .title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  .back-btn {
-    font-size: 24px;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .chat-btn img {
-    width: 25px;
-    height: 25px;
-  }
-  
-  /* Main Content */
-  .container {
-    padding: 15px;
-  }
-  
-  .subtitle {
     font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .input-field {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .amount-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .amount-btn {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .pin-input {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    flex-direction: column;
     text-align: center;
   }
-  
-  /* Input Group */
-  .input-group {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .input-label {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .network-icon {
+
+  .chat-btn img {
     width: 20px;
     height: 20px;
-    margin-right: 10px;
   }
-  
-  .label-text {
-    font-size: 14px;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .input-field {
+
+  .dropdown-label {
     width: 100%;
+  }
+
+  .amount-options {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .amount-btn {
+    font-size: 12px;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
   }
-  
-  .input-field:focus {
-    border-color: #00bcd4;
+
+  .pin-input {
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
   }
-  
-  .field-icon {
-    position: absolute;
-    right: 10px;
-    top: 35px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Continue Button */
+
   .continue-btn {
-    display: block;
-    width: 70%;
+    font-size: 14px;
     padding: 12px;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(to right, #00bcd4, #0086c3);
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
   }
-  
-  .continue-btn:hover {
-    background: linear-gradient(to right, #0086c3, #006b9a);
-  }
-  
-  /* Bottom Navigation */
-  .bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    background: #4dd0e1;
-    padding: 10px 0;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .nav-item img {
-    width: 30px;
-    transition: transform 0.2s ease;
-  }
-  
-  .nav-item:hover img {
-    transform: scale(1.1);
-  }
-  
-
-
+}
 
 
 
