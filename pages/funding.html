@@ -18,22 +18,43 @@
         <p class="fund-text">Here is your Admin Account to fund your wallet</p>
         <!-- <span>- ₦50 on all funding</span> -->
         <h2 id="Account_number" class="account-number">4770011571</h2>
-        <button class="copy-btn">
+        <button class="copy-btn" onclick="copyAccountNumber()">
           Copy <img src="../assets/copy-icon.png" alt="Copy Icon">
         </button>
       </div>
     </div>
   </header>
 
+
   <div class="admincontact">
-    <h5 class="admin">If you have completed your transaction, kindly upload your transaction screenshot and notify the Administrator.</h5>
-    <input type="file" id="transactionScreenshot" accept="image/*" class="upload-field">
+    <h5 class="admin">
+      If you have completed your transaction, kindly upload your transaction screenshot and notify the Administrator.
+    </h5>
+  
+    <!-- Custom File Upload -->
+    <label for="transactionScreenshot" class="upload-field">
+      <span id="fileLabel">Choose a file</span>
+      <input type="file" id="transactionScreenshot" accept="image/*">
+    </label>
+  
     <button id="adminDM" class="adminDM">Verify Payment</button>
   </div>
+  
+
+
+  <!-- Modal Popup -->
+  <div id="transactionModal" class="modal">
+    <div class="modal-content">
+      <p>On every of your transaction to fund your account, you will be charged ₦50, minimum funding amount is ₦500</p>
+      <button onclick="closeModal()" class="modal-btn">OK</button>
+    </div>
+  </div>
+
   
   <script src="../js/alerts.js"></script>
   <script src="../update/auth.js"></script>
   <script src="../update/topup.js"></script>
+
 </body>
 </html>
 

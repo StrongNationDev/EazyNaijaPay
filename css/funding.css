@@ -117,8 +117,6 @@
   .nav-item:hover img {
     transform: scale(1.1);
   }
-  
-
 
 
   .admincontact {
@@ -126,12 +124,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 500px;
     padding: 20px;
-    background-color: #ffffff; 
+    background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px; 
+    border-radius: 8px;
     font-weight: 500;
     margin-left: 35px;
   }
@@ -163,29 +161,28 @@
     transform: scale(1);
   }
   
-
-  
+  /* Custom Upload Field */
   .upload-field {
-    width: 280px;
+    width: 100%;
     height: 150px;
     border: 2px solid #00bcd4;
     margin-bottom: 18px;
     border-radius: 15px;
     text-align: center;
     display: flex;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center;    /* Centers content vertically */
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
     font-size: 16px;
     color: #00bcd4;
-    background-color: #f9f9f9; /* Light background for better visibility */
-    cursor: pointer; /* Makes it look clickable */
+    background-color: #f9f9f9;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
   }
   
   .upload-field input[type="file"] {
-    opacity: 0; /* Hides the actual file input */
+    opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -194,23 +191,59 @@
     cursor: pointer;
   }
   
-  .upload-field::before {
-    content: "Choose a file";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-    color: #00bcd4;
+  /* Make sure the label text updates */
+  .upload-field span {
+    pointer-events: none;
   }
   
-
-
-
   
 
 
 
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.modal-btn {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modal-btn:hover {
+  background-color: #0056b3;
+}
 
 
 
@@ -243,3 +276,5 @@
   opacity: 0;
   transform: translateX(-50%) translateY(-20px);
 }
+
+

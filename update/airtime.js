@@ -1,5 +1,7 @@
 const API_BASE_URL = "https://eazynaijapay-server.onrender.com/Verified_Members";
 const AIRTIME_API_URL = "https://eazynaijapay-server.onrender.com/proxy/topup";
+const AUTH_TOKEN = "4e1232989bd072dc935c84de444f64025ce874f4";
+
 
 const networkMap = {
     "1": "MTN",
@@ -210,7 +212,7 @@ async function clearTransactionHistory() {
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`, {
+        const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/transaction_histories`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

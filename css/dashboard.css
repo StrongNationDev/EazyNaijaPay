@@ -65,6 +65,7 @@ body {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
 }
 
 .balance-text {
@@ -159,6 +160,7 @@ body {
 /* Recent Activities Section */
 .recent-activities {
   padding: 20px;
+  margin-bottom: 130px;
 }
 
 .activity-header {
@@ -202,6 +204,9 @@ body {
   margin-top: 5px;
 }
 
+
+
+
 /* Bottom Navbar */
 .bottom-navbar {
   position: fixed;
@@ -235,6 +240,41 @@ body {
 .nav-link:focus img {
   transform: scale(1.1);
 }
+
+
+
+
+
+
+
+
+
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 300px; /* Adjust as needed */
+  text-align: center;
+}
+
+
+
+
 
 
 

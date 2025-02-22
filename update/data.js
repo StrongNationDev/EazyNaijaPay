@@ -1,6 +1,6 @@
-const API_BASE_URL = "http://localhost:3000/Verified_Members";
+const API_BASE_URL = "https://eazynaijapay-server.onrender.com/Verified_Members";
 const DATA_API_URL = "https://eazynaijapay-server.onrender.com/proxy/data";
-// const AUTH_TOKEN = "8f00fa816b1e3b485baca8f44ae5d361ef803311";
+// const AUTH_TOKEN = "094fb0716bb133e4d6cbc5934bd9e8d5cae3ccce";
 const AUTH_TOKEN = "4e1232989bd072dc935c84de444f64025ce874f4";
 
 
@@ -370,7 +370,7 @@ async function addTransactionHistory(userId, transactionData) {
         console.log("📤 Sending Transaction:", transactionData);
         console.log("🔍 User ID for request:", userId);
 
-        const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`, {
+        const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/transaction_histories`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(transactionData),
@@ -429,7 +429,7 @@ async function clearTransactionHistory() {
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/Verified_Members/${userId}/transaction_histories`, {
+        const response = await fetch(`https://eazynaijapay-server.onrender.com/Verified_Members/${userId}/transaction_histories`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

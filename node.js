@@ -7,10 +7,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
+
 const AIRTIME_API_URL = "https://www.husmodata.com/api/topup/";
 const DATA_API_URL = "https://www.husmodata.com/api/data/";
-// const AUTH_TOKEN = "8f00fa816b1e3b485baca8f44ae5d361ef803311";
 const AUTH_TOKEN = "4e1232989bd072dc935c84de444f64025ce874f4";
+// const AUTH_TOKEN = "094fb0716bb133e4d6cbc5934bd9e8d5cae3ccce";
 
 app.post("/proxy/topup", async (req, res) => {
     try {

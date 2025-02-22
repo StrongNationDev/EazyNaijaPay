@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+
         const file = fileInput.files[0];
         if (!file) {
             showAlert('Please upload a screenshot of your transaction.');
@@ -44,6 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("transactionModal").style.display = "flex";
+  });
+  
+  function closeModal() {
+    document.getElementById("transactionModal").style.display = "none";
+  }
+  
+
+function copyAccountNumber() {
+    const accountNumber = document.getElementById("Account_number").innerText;
+
+    const tempInput = document.createElement("textarea");
+    tempInput.value = accountNumber;
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+    document.execCommand("copy");
+
+    document.body.removeChild(tempInput);
+
+    showAlert("Account number copied: " + accountNumber);
+  }
 
 
 

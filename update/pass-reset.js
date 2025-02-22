@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   
       try {
-        const response = await fetch("http://localhost:3000/reset-password", {
+        const response = await fetch("https://eazynaijapay-server.onrender.com/reset-password", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
