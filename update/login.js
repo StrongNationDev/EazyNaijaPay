@@ -16,7 +16,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     if (response.ok) {
       showAlert(data.message);
 
-      const userResponse = await fetch('http://localhost:3000/verified_Members');
+      const userResponse = await fetch('https://eazynaijapay-server.onrender.com/Verified_Members');
       const users = await userResponse.json();
 
       const loggedInUser = users.find(user => user.username === username);
