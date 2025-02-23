@@ -5,7 +5,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
   const password = document.getElementById('password').value;
 
   try {
-    const response = await fetch('https://eazynaijapay-server.onrender.com/login', {
+    const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
@@ -16,7 +16,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     if (response.ok) {
       showAlert(data.message);
 
-      const userResponse = await fetch('https://eazynaijapay-server.onrender.com/Verified_Members');
+      const userResponse = await fetch('http://localhost:3000/verified_Members');
       const users = await userResponse.json();
 
       const loggedInUser = users.find(user => user.username === username);
